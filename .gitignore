@@ -38,3 +38,26 @@ __pycache__/
 
 # Logs
 *.log
+git fetch origin
+
+# Python
+__pycache__/
+*.pyc
+*.db
+*.db-shm
+*.db-wal
+
+# Environment variables (keep .env.example)
+.env
+!.env.example
+
+# Logs
+*.log
+*.json
+*.pdf
+*.zip
+
+# Large data files
+*.json
+*.pdf
+*.zip

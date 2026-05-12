@@ -1,0 +1,50 @@
+version: '3.9'
+
+# AML_In_Crypto — isolated DB containers
+# Ports are shifted so they don't clash with any existing project:
+#   MySQL/MariaDB  → host 3307  (their app uses 3306 internally)
+#   MongoDB        → host 27018 (their app uses 27017 internally)
+#   Neo4j browser  → host 7475  (their app uses 7474 internally)
+#   Neo4j Bolt     → host 7688  (their app uses 7687 internally)
+
+services:
+
+  mariadb:
+    image: mariadb:11
+    container_name: aml_mariadb
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: aml_clean
+    ports:
+      - "3307:3306"
+    volumes:
+      - aml_mariadb_data:/var/lib/mysql
+      # Auto-runs the schema on first start:
+      - ./AML/schemas/mariadb_tables.sql:/docker-entrypoint-initdb.d/01_schema.sql:ro
+
+  mongodb:
+    image: mongo:7
+    container_name: aml_mongo
+    restart: unless-stopped
+    ports:
+      - "27018:27017"
+    volumes:
+      - aml_mongo_data:/data/db
+
+  neo4j:
+    image: neo4j:5
+    container_name: aml_neo4j
+    restart: unless-stopped
+    environment:
+      NEO4J_AUTH: neo4j/password1234
+    ports:
+      - "7475:7474"   # browser UI
+      - "7688:7687"   # Bolt (used by Python driver)
+    volumes:
+      - aml_neo4j_data:/data
+
+volumes:
+  aml_mariadb_data:
+  aml_mongo_data:
+  aml_neo4j_data:
