@@ -1,2 +1,40 @@
 .vscode/
 nul
+.next/
+node_modules/
+.next/dev/cache/
+trace
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+
+# Databases
+*.db
+*.db-shm
+*.db-wal
+
+# Environment files (keep .env.example but ignore .env)
+.env
+!.env.example
+
+# Build / logs
+*.log
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+
+# Databases
+*.db
+*.db-shm
+*.db-wal
+
+# Environment files
+.env
+!.env.example
+
+# Logs
+*.log

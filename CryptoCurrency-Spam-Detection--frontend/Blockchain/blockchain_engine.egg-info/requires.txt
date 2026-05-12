@@ -1,0 +1,10 @@
+requests>=2.32.0
+
+[bitcoin]
+bitcoinlib>=0.7.0
+
+[dev]
+pytest>=8.0.0
+
+[evm]
+web3>=7.0.0
